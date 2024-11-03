@@ -1,7 +1,12 @@
 import logo from './logo.svg';
 import './App.css';
-
+import FunctionalComponent from "./component/functional";
+import ClassComponent from "./component/class";
+import StyledText from "./component/hocimpl";
+import JsxExample from "./component/JsxExample";
 function App() {
+    const deb = true;
+    if(deb=== true) return <JsxExample subject={"ReactJs"}/>
   return (
     <div className="App">
       <header className="App-header">
@@ -18,6 +23,9 @@ function App() {
           Learn React
         </a>
       </header>
+      <FunctionalComponent />
+      <ClassComponent/>
+        <StyledText/>
     </div>
   );
 }
