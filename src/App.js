@@ -1,36 +1,26 @@
-import './App.css';
-import { useState } from 'react';
-// Chỉ tăng  biến count nhưng không render lại giao diện
-function App() {
-  const  [name, setName] = useState('');
-  const [age, setAge] = useState(18);
-  const onChangeName = (e) => {
-    setName(e.target.value);
-  }
-  const handleChangeAge = (value, action) => {
-    if(action === 'increase') {
-      setAge(age + value);
-    } else if(action === 'decrease') {
-      setAge(age - value);
-    }
-  }
+import { 
+  Example1_BasicCounter, 
+  Example2_StringInput,
+  Example3_Boolean,
+  Example4_Array,
+  Example5_Object,
+} from './component';
+export default function App() {
   return (
-    <div className="App">
-      <h1>Name: {name}</h1>
-      <h2>Age: {age}</h2>
-      <input type="text" onKeyDown={onChangeName} />
-      <input 
-        type="button" 
-        value={'+'}
-        onClick={() => handleChangeAge(1, 'increase')}
-      />
-      <input 
-        type="button" 
-        value={'-'}
-        onClick={() => handleChangeAge(1, 'decrease')}
-      />
+    <div className="min-h-screen bg-gray-50 p-8">
+      <div className="max-w-6xl mx-auto">
+        <h1 className="text-4xl font-bold text-center mb-8 text-blue-600">
+          Tất cả ví dụ useState trong React
+        </h1>
+        
+        <div className="grid gap-6">
+          <Example1_BasicCounter />
+          <Example2_StringInput />
+          <Example3_Boolean />
+          <Example4_Array />
+          <Example5_Object />
+        </div>
+      </div>
     </div>
   );
 }
-
-export default App;
