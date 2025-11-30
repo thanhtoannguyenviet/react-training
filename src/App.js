@@ -4,6 +4,9 @@ import {
   Example3_Boolean,
   Example4_Array,
   Example5_Object,
+  Example6_PrevState,
+  Example7_TodoList,
+  Example8_Toggle,
 } from './component';
 export default function App() {
   return (
@@ -19,6 +22,9 @@ export default function App() {
           <Example3_Boolean />
           <Example4_Array />
           <Example5_Object />
+          <Example6_PrevState />
+          <Example7_TodoList />
+          <Example8_Toggle/>
         </div>
       </div>
     </div>
