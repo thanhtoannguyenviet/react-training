@@ -1,19 +1,29 @@
 import logo from './logo.svg';
 import './App.css';
 import { useState, useEffect } from 'react';
+import { clear } from '@testing-library/user-event/dist/clear';
 
 function App() {
-  const [count, setCount] = useState(0);
+  const [timer, setTimer] = useState(10);
   
   useEffect(() => {
-    console.log('Count đã thay đổi:', count);
-    // Chạy mỗi khi count thay đổi
-  }, [count]); // [count] = chạy khi count thay đổi
+    
+    console.log(timer);
+    if(timer < 0) {
+      return;
+    }
+  
+    const timerId = setInterval(() => {
+      setTimer(prevTimer => prevTimer - 1);
+    } , 1000);
+
+    return () => clearInterval(timerId); // cleanup function
+  }, [timer]); // [timer] = chạy khi timer thay đổi
   
   return (
-    <button onClick={() => setCount(count + 1)}>
-      Clicked {count} times
-    </button>
+    <div>
+      {timer >= 0 ? <h1>Countdown: {timer} seconds</h1> : <h1>Time's up!</h1>}
+    </div>
   );
 }
 
