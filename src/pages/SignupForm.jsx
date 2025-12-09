@@ -24,9 +24,10 @@
 const SignupForm = () => {
     const formik = useFormik({
      initialValues: {
-       firstName: '',
-       lastName: '',
+       fullname: '',
+       phonenumber: '',
        email: '',
+       password: ''
      },
      validate,
      onSubmit: values => {
@@ -35,25 +36,25 @@ const SignupForm = () => {
    });
    return (
      <form onSubmit={formik.handleSubmit}>
-       <label htmlFor="firstName">First Name</label>
+       <label htmlFor="firstName">Full Name</label>
        <input
          id="firstName"
          name="firstName"
          type="text"
          onChange={formik.handleChange}
-         value={formik.values.firstName}
+         value={formik.values.fullname}
        />
        {formik.errors.firstName ? <div>{formik.errors.firstName}</div> : null}
  
-       <label htmlFor="lastName">Last Name</label>
+       <label htmlFor="phonenumber">Phone Number</label>
        <input
-         id="lastName"
-         name="lastName"
+         id="phonenumber"
+         name="phonenumber"
          type="text"
          onChange={formik.handleChange}
-         value={formik.values.lastName}
+         value={formik.values.phonenumber}
        />
-       {formik.errors.lastName ? <div>{formik.errors.lastName}</div> : null}
+       {formik.errors.phonenumber ? <div>{formik.errors.phonenumber}</div> : null}
  
        <label htmlFor="email">Email Address</label>
        <input
@@ -65,6 +66,15 @@ const SignupForm = () => {
        />
        {formik.errors.email ? <div>{formik.errors.email}</div> : null}
  
+       <label htmlFor="password">Password</label>
+       <input
+         id="password"
+         name="password"
+         type="password"
+         onChange={formik.handleChange}
+         value={formik.values.password}
+       />
+       {formik.errors.password ? <div>{formik.errors.password}</div> : null}
        <button type="submit">Submit</button>
      </form>
    );
