@@ -10,7 +10,7 @@ function App() {
     <nav>
         <Link to="/">Home</Link> | 
         <Link to="/signup">Sign Up</Link> | 
-        <Link to="/admin">Contact</Link>
+        <Link to="/admin">Admin</Link>
       </nav>
     <Routes>
       <Route path="/signup" element={<SignupForm />} />
