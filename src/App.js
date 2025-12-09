@@ -9,8 +9,8 @@ function App() {
     <BrowserRouter>
     <nav>
         <Link to="/">Home</Link> | 
-        <Link to="/about">About</Link> | 
-        <Link to="/contact">Contact</Link>
+        <Link to="/signup">Sign Up</Link> | 
+        <Link to="/admin">Contact</Link>
       </nav>
     <Routes>
       <Route path="/signup" element={<SignupForm />} />
