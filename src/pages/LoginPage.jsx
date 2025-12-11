@@ -1,7 +1,9 @@
- import { useFormik } from 'formik';
- import { useNavigate } from 'react-router-dom';
- import { useState } from 'react';
+import { useFormik } from 'formik';
+import { useNavigate } from 'react-router-dom';
+import { useState,useContext } from 'react';
+import { AuthContext } from '../context/AuthContext';
 const LoginPage = () => {
+  const { users, addUser } = useContext(AuthContext);
     const [error, setError] = useState('');
     const navigate = useNavigate();
     const formik = useFormik({
@@ -10,13 +12,14 @@ const LoginPage = () => {
         password: ''
         },
         onSubmit: values => {
-            if(values.email === 'admin@example.com' && values.password === 'admin'){
+            users.forEach(element => {
+              if(values.email === element.email && values.password === element.password){
                 setError('');
                 localStorage.setItem('authToken','admin')
                 navigate('/admin');
-            }
-            else setError('Invalid email or password');
-
+              }
+            });
+            setError('Invalid email or password');
         },
     });
     return (

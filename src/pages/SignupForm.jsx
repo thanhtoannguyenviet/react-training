@@ -1,16 +1,19 @@
  import { useFormik } from 'formik';
+ import { useContext } from 'react';
+  import { AuthContext } from '../context/AuthContext';
+  import { Navigate } from 'react-router-dom';
  const validate = values => {
    const errors = {};
-   if (!values.firstName) {
-     errors.firstName = 'Required';
-   } else if (values.firstName.length > 5) {
-     errors.firstName = 'Must be 5 characters or less';
+   if (!values.fullname) {
+     errors.fullname = 'Required';
+   } else if (values.fullname.length > 5) {
+     errors.fullname = 'Must be 5 characters or less';
    }
  
-   if (!values.lastName) {
-     errors.lastName = 'Required';
-   } else if (values.lastName.length > 20) {
-     errors.lastName = 'Must be 20 characters or less';
+   if (!values.phonenumber) {
+     errors.phonenumber = 'Required';
+   } else if (values.phonenumber.length > 20) {
+     errors.phonenumber = 'Must be 20 characters or less';
    }
  
    if (!values.email) {
@@ -18,10 +21,13 @@
    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
      errors.email = 'Invalid email address';
    }
- 
+  if (!values.password) {
+     errors.password = 'Required';
+   } 
    return errors;
  };
 const SignupForm = () => {
+    const { addUser } = useContext(AuthContext);
     const formik = useFormik({
      initialValues: {
        fullname: '',
@@ -31,50 +37,60 @@ const SignupForm = () => {
      },
      validate,
      onSubmit: values => {
-       alert(JSON.stringify(values, null, 2));
+       addUser(values);
+       return <Navigate to="/login" />
      },
    });
    return (
      <form onSubmit={formik.handleSubmit}>
-       <label htmlFor="firstName">Full Name</label>
+      <div>
+       <label htmlFor="fullname">Full Name</label>
        <input
-         id="firstName"
-         name="firstName"
+         id="fullname"
+         name="fullname"
          type="text"
          onChange={formik.handleChange}
+         onBlur={formik.handleBlur}
          value={formik.values.fullname}
        />
-       {formik.errors.firstName ? <div>{formik.errors.firstName}</div> : null}
- 
+       {formik.touched.fullname ? <div style={{ color: 'red'}}>{formik.errors.fullname}</div> : null}
+ </div>
+      <div> 
        <label htmlFor="phonenumber">Phone Number</label>
        <input
          id="phonenumber"
          name="phonenumber"
          type="text"
          onChange={formik.handleChange}
+         onBlur={formik.handleBlur}
          value={formik.values.phonenumber}
        />
-       {formik.errors.phonenumber ? <div>{formik.errors.phonenumber}</div> : null}
- 
+       {formik.touched.phonenumber ? <div style={{ color: 'red'}}>{formik.errors.phonenumber}</div> : null}
+ </div>
+ <div>
        <label htmlFor="email">Email Address</label>
        <input
          id="email"
          name="email"
          type="email"
          onChange={formik.handleChange}
+         onBlur={formik.handleBlur}
          value={formik.values.email}
        />
-       {formik.errors.email ? <div>{formik.errors.email}</div> : null}
- 
+       {formik.touched.email ? <div style={{ color: 'red'}}>{formik.errors.email}</div> : null}
+ </div>
+ <div>
        <label htmlFor="password">Password</label>
        <input
          id="password"
          name="password"
          type="password"
          onChange={formik.handleChange}
+         onBlur={formik.handleBlur}
          value={formik.values.password}
        />
-       {formik.errors.password ? <div>{formik.errors.password}</div> : null}
+       {formik.touched.password ? <div style={{ color: 'red'}}>{formik.errors.password}</div> : null}
+       </div>
        <button type="submit">Submit</button>
      </form>
    );
